@@ -1,0 +1,44 @@
+<div role="application" aria-labelledby="application_label">
+    <h3 id="application_label" role="heading">Currency converter</h3>
+    <p role="document">Type in the base amount and select currency.</p>
+    <p class="bg-warning text-warning" ng-show="cc.errorMessage">{{cc.errorMessage}}</p>
+
+    <div class="form-group" id="fg1" role="form" aria-labelledby="fg1">
+        <span class="form-group-title" id="fg1">Base amount</span>
+        <input  type="number" step="0.01" min="0"
+                ng-change="cc.convertAmount()"
+                ng-model="cc.baseAmount"
+                ng-pattern="/^[0-9]+(\.[0-9]+)?$/"
+                aria-label="Base amount">
+        <select ng-change="cc.getConversionRate()"
+                ng-options="currency for currency in cc.currencies"
+                ng-model="cc.baseCurrency"
+                aria-label="Base currency">
+        </select>
+    </div>
+
+    <div class="form-group" id="fg2" role="form" aria-labelledby="fg2">
+        <span class="form-group-title" id="fg2">Converted amount</span>
+        <input  type="currency" readonly
+                ng-change="cc.convertAmount()"
+                ng-model="cc.convertedAmount"
+                aria-label="Converted amount">
+        <select ng-change="cc.convertAmount()"
+                ng-options="currency for currency in cc.currencies"
+                ng-model="cc.convertedCurrency"
+                aria-label="Converted currency">
+        </select>
+    </div>
+
+    <div class="form-group" role="document">
+        <p class="text-info">1.00 {{cc.baseCurrency}} equals {{cc.conversionRate | number: 2 }} {{cc.convertedCurrency}}</p>
+    </div>
+
+    <hr>
+    <a class="text-right" href="#" ng-click="(isToggled) ? isToggled = false : isToggled = true" role="button">Disclaimer</a>
+    <div class="disclaimer" ng-show="isToggled === true" role="contentinfo" aria-hidden="true">
+        Currency rates provided by
+        <a href="http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html">European Central Bank</a>
+    </div>
+</div>
+
