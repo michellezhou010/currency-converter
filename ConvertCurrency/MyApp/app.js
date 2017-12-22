@@ -5,7 +5,7 @@ angular.module('app', [])
             controller: CurrencyConverterController,
             controllerAs: 'cc',
             restrict: 'EA',
-            templateUrl: 'app/components/currencyConverter/currency-converter.tmpl.html'
+            templateUrl: ''
         };
 
         return directive;
